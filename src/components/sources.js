@@ -36,8 +36,8 @@ export default function Sources() {
     < SourcesStyled>
       <i class="fas fa-times" onclick="toggleSources()"></i>
       <h3 id="sourcesTitle"></h3>
-      <p><a href="https://covid19api.com/" target="_blank">COVID19API</a></p>
-      <p><a href="https://restcountries.eu/" target="_blank">REST Countries</a></p>
+      <p><a href="https://covid19api.com/" target="_blank" rel="noopener noreferrer">COVID19API</a></p>
+      <p><a href="https://restcountries.eu/" target="_blank" rel="noopener noreferrer">REST Countries</a></p>
     </ SourcesStyled>
   )
 }

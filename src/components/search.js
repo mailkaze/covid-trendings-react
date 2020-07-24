@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 const SearchStyled = styled.div`
   position: relative;
@@ -20,12 +21,13 @@ const SearchStyled = styled.div`
 `
 
 export default function Search() {
+  const placeholder = useSelector(state => state.lang.searchPlaceHolder)
   return (
     <SearchStyled className="search">
       <input
         type="text"
         id="country-search"
-        placeholder="Busca tu país ..."
+        placeholder={placeholder}
       />
       <i className="fas fa-search"></i>
     </SearchStyled>

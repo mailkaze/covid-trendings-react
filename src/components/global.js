@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 const GlobalStyled = styled.div`
   padding: 10px;
   background: #fdfffc;
   margin: 8px 0;
-  padding: 0;
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, .2);
@@ -37,13 +37,18 @@ const GlobalStyled = styled.div`
 `
 
 export default function Global() {
+  const globalTitle = useSelector(state => state.lang.globalTitle)
+  const globalNewCases = useSelector(state => state.lang.globalNewCases)
+  const globalTotalCases = useSelector(state => state.lang.globalTotalCases)
+  const globalCasesPerMillion = useSelector(state => state.lang.globalCasesPerMillion)
+  const global = useSelector(state => state.global)
   return (
     <GlobalStyled className="global card" >
-      <i class="fas fa-globe-africa"></i>
-      <h3 id="globalTitle"></h3>
-      <p id="globalNewCasesP"></p>
-      <p id="globalTotalCasesP"></p>
-      <p id="globalCasesPerMillionP"></p>
+      <i className="fas fa-globe-africa"></i>
+      <h3 id="globalTitle">{globalTitle}</h3>
+      <p id="globalNewCasesP">{globalNewCases}<span id='globalNewConfirmed'>{Intl.NumberFormat().format(global.newConfirmed)}</span></p>
+      <p id="globalTotalCasesP">{globalTotalCases}<span id='globalTotal'>{Intl.NumberFormat().format(global.totalConfirmed)}</span></p>
+      <p id="globalCasesPerMillionP">{globalCasesPerMillion}<span id='globalCasesPerMillion'>{Intl.NumberFormat().format(global.casesPerMillion)}</span></p>
     </GlobalStyled>
   )
 }
