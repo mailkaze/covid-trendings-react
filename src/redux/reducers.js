@@ -1,14 +1,15 @@
 export default function reducer(state, action) {
   switch(action.type) {
     case 'SET_LANGUAGE':
-      {console.log('mando el lang al store')
-      return {...state, lang: action.payload}}
+      return {...state, lang: action.payload}
     case 'SET_GLOBAL':
-      {console.log('mando el global al store')
-      return {...state, global: action.payload}}
+      return {...state, global: action.payload}
     case 'SET_COUNTRIES':
-     {console.log('mando el countries al store')
-      return {...state, countries: action.payload}}
+      return {...state, countries: action.payload}
+    case 'TOGGLE_INFO':
+      return {...state, showInfo: !state.showInfo}
+    case 'TOGGLE_SOURCES':
+      return {...state, showSources: !state.showSources} 
     default:
       return state
   }

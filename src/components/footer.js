@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
+import { toggleSources } from '../redux/actions'
 
 const FooterStyled = styled.footer`
   position: fixed;
@@ -38,14 +39,10 @@ const FooterStyled = styled.footer`
 
 export default function Footer() {
   const sources = useSelector((store) => store.lang.sources)
-
-  function handleClick() {
-    // toggleSources()
-  }
-
+  const dispatch = useDispatch()
   return (
     <FooterStyled>
-      <span id="sources" onClick={handleClick}>{sources}</span>
+      <span id="sources" onClick={() => dispatch(toggleSources())}>{sources}</span>
       <span id="separator"> | </span>
       <a href="https://github.com/mailkaze" target="_blank" rel="noopener noreferrer">
         <span>by mailkaze<i className="fab fa-github"></i></span>

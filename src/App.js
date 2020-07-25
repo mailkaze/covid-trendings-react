@@ -29,7 +29,8 @@ function App() {
   const dispatch = useDispatch()
   const es = useSelector(state => state.es)
   const en = useSelector(state => state.en)
-
+  const showInfo =  useSelector(state => state.showInfo)
+  const showSources = useSelector(state => state.showSources)
   function loadCountries() {
     fetch('https://restcountries.eu/rest/v2/all')
     .then(res => {
@@ -73,7 +74,7 @@ function App() {
         dispatch(setCountries(tempCountries))
       })
     })
-}
+  }
 
   useEffect(() => {
     navigator.language.startsWith('es') // select language based on the clients browser
@@ -89,8 +90,8 @@ function App() {
           <Search />
           <CardsContainer />
         </div>
-        {/* <Info />
-        <Sources /> */}
+        { showInfo && <Info /> }
+        { showSources && <Sources /> }
         <Footer />
     </AppStyled>
   );

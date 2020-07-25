@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleSources } from '../redux/actions'
 
 const SourcesStyled = styled.div`
   z-index: 100;
@@ -32,10 +34,12 @@ const SourcesStyled = styled.div`
 `
 
 export default function Sources() {
+  const sources = useSelector(state => state.lang.sources)
+  const dispatch = useDispatch()
   return (
     < SourcesStyled>
-      <i class="fas fa-times" onclick="toggleSources()"></i>
-      <h3 id="sourcesTitle"></h3>
+      <i className="fas fa-times" onClick={() => dispatch(toggleSources())}></i>
+      <h3 id="sourcesTitle">{sources}</h3>
       <p><a href="https://covid19api.com/" target="_blank" rel="noopener noreferrer">COVID19API</a></p>
       <p><a href="https://restcountries.eu/" target="_blank" rel="noopener noreferrer">REST Countries</a></p>
     </ SourcesStyled>

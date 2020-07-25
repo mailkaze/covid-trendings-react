@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleInfo } from '../redux/actions'
 
 const InfoStyled = styled.div`
   z-index: 100;
@@ -60,16 +62,19 @@ const InfoStyled = styled.div`
 `
 
 export default function Info() {
+  const lang = useSelector(state => state.lang)
+  const dispatch = useDispatch()
+
   return (
     <InfoStyled>
-      <i class="fas fa-times" onclick="toggleInfo()"></i>
-      <h3 id="infoTitle"></h3>
-      <h4 id="infoCasesPerMillion"></h4>
-      <p id="infoP1"></p>
-      <p class="little-margin" id="infoP2"></p>
-      <h4 id="infoGlobalCasesPerMillion"></h4>
-      <p id="infoP3"></p>
-      <button onclick="toggleInfo()" id="infoClose"></button>
+      <i className="fas fa-times" onClick={() => dispatch(toggleInfo())} ></i>
+      <h3 id="infoTitle"><i className='fas fa-info-circle' ></i> {lang.infoTitle}</h3>
+      <h4 id="infoCasesPerMillion">{lang.infoCasesPerMillion}</h4>
+      <p id="infoP1">{lang.infoP1}</p>
+      <p className="little-margin" id="infoP2">{lang.infoP2a}<span className="green">{lang.infoP2b}</span>{lang.infoP2c}<span className="red">{lang.infoP2d}</span>.</p>
+      <h4 id="infoGlobalCasesPerMillion">{lang.infoGlobalCasesPerMillion}</h4>
+      <p id="infoP3">{lang.infoP3a}<span className="green">{lang.infoP3b}</span>{lang.infoP3c}<span className="red">{lang.infoP3d}</span>.</p>
+      <button onClick={() => dispatch(toggleInfo())} id="infoClose">{lang.infoClose}</button>
     </InfoStyled>
   )
 }

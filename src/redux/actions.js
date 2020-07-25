@@ -18,3 +18,15 @@ export function setCountries(countries) {
     payload: countries
   }
 }
+
+export function toggleInfo() {
+  return {
+    type: 'TOGGLE_INFO'
+  }
+}
+
+export function toggleSources() {
+  return {
+    type: 'TOGGLE_SOURCES'
+  }
+}
