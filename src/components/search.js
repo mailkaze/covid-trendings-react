@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setSearchTerm } from '../redux/actions'
 
 const SearchStyled = styled.div`
   position: relative;
@@ -21,6 +22,25 @@ const SearchStyled = styled.div`
 `
 
 export default function Search() {
+  const dispatch = useDispatch()
+
+  function handlekeyUp(e) {
+    const search = e.target.value.toLowerCase().trim()
+    .replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()); // cada palabra pasa a empezar por mayuscula
+    dispatch(setSearchTerm(search))
+    if (e.keyCode === 13) {
+      e.target.value = ''
+      dispatch(setSearchTerm(''))
+    }
+  }
+
+  function handleClick(e) {
+    // const search = e.target.value.toLowerCase().trim()
+    // .replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()); // cada palabra pasa a empezar por mayuscula
+    // dispatch(setSearchTerm(search))
+    // e.target.value = ''
+    // dispatch(setSearchTerm(''))
+  }
   const placeholder = useSelector(state => state.lang.searchPlaceHolder)
   return (
     <SearchStyled className="search">
@@ -28,8 +48,9 @@ export default function Search() {
         type="text"
         id="country-search"
         placeholder={placeholder}
+        onKeyUp={handlekeyUp}
       />
-      <i className="fas fa-search"></i>
+      <i className="fas fa-search" onClick={handleClick} ></i>
     </SearchStyled>
   )
 }

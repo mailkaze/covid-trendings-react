@@ -10,7 +10,8 @@ import Header from './components/header'
 import {
   setLanguage,
   setGlobal,
-  setCountries
+  setCountries,
+  setMatchCountries
 } from './redux/actions'
 
 const AppStyled = styled.div`
@@ -31,6 +32,21 @@ function App() {
   const en = useSelector(state => state.en)
   const showInfo =  useSelector(state => state.showInfo)
   const showSources = useSelector(state => state.showSources)
+  const searchTerm = useSelector(state => state.searchTerm)
+  const countries = useSelector(state => state.countries)
+
+  function searchCountry(searchTerm) {
+    const match = countries.filter( c => {
+      for (let name of c.names) {
+        if (name !== null) {
+          if (name.includes(searchTerm)) return c
+        } 
+      }
+    })
+    dispatch(setMatchCountries(match))
+    console.log(match)
+  }
+
   function loadCountries() {
     fetch('https://restcountries.eu/rest/v2/all')
     .then(res => {
@@ -82,6 +98,10 @@ function App() {
     : dispatch(setLanguage(en)) 
     loadCountries()
   }, [dispatch])
+
+  useEffect(() => {
+    if (searchTerm !== '') searchCountry(searchTerm)
+  },[searchTerm])
 
   return (
     <AppStyled>

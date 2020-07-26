@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 const CountryDataStyled = styled.div`
   background: #fdfffc;
@@ -8,13 +9,6 @@ const CountryDataStyled = styled.div`
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, .2);
-  .fa-globe-africa {
-    /* display: inline-block; */
-    color: #118ab2;
-    font-size: 2em;
-    margin: 0 5px 5px 0;
-    vertical-align: top;
-  }
   .text {
     padding: 8px;
   }
@@ -33,29 +27,7 @@ const CountryDataStyled = styled.div`
     height: 180px;
     object-fit: cover;
   }
-  .country-select {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 70px;
-    transition: .1s;
-  }
-  .country-select:active {
-    box-shadow: none;
-    transform: translateY(3px);
-  }
-  .country-select img {
-    width: 22%;
-    margin: 0;
-    height: 100%;
-    object-fit: cover;
-  }
-  .country-select h3 {
-    width: 78%;
-    margin: 0;
-    padding: 0 10px;
-    font-size: .95em;
-  }
+  
   .top {
     display: flex;
     width: 100%;
@@ -113,31 +85,33 @@ const CountryDataStyled = styled.div`
 `
 
 export default function CountryData() {
+  const lang = useSelector(state => state.lang)
+  const countryData = useSelector(state => state.countryData)
   return (
-    <CountryDataStyled className="country-data ">
-      <div class="top">
+    <CountryDataStyled classNameName="country-data ">
+      <div className="top">
             <img src={countryData.flag} alt=""/>
-            <div class="top-text">
+            <div className="top-text">
             <h3>{countryData.name}</h3>
             <p>{lang.newCases}<span>{Intl.NumberFormat().format(countryData.casesToday)}</span></p>
             <p>{lang.totalCases}<span>{Intl.NumberFormat().format(countryData.totalCases)}</span></p>
             <p>{lang.population}<span>{Intl.NumberFormat().format(countryData.population)}</span></p>
             </div>
         </div>
-        <div class="text" >
+        <div className="text" >
             <p>{lang.casesPerMillion}</p>
-            <p class="more-margin-p">
-                <i class="fas fa-caret-up {countryData.showArrowUp}"></i>
-                <i class="fas fa-caret-down {countryData.showArrowDown}"></i>
-                <span class={countryData.trending}>{Intl.NumberFormat().format(countryData.newCasesPerMillion.toFixed(2))}</span>
-                <i class="far fa-question-circle" onclick="toggleInfo()"></i>
+            <p className="more-margin-p">
+                <i className="fas fa-caret-up {countryData.showArrowUp}"></i>
+                <i className="fas fa-caret-down {countryData.showArrowDown}"></i>
+                <span className={countryData.trending}>{Intl.NumberFormat().format(countryData.newCasesPerMillion.toFixed(2))}</span>
+                <i className="far fa-question-circle" onClick="toggleInfo()"></i>
             </p>
             <p>{lang.comparativeGlobalCasesPerMillion}</p>
             <p> 
-                <i class="fas fa-caret-up {countryData.showArrowUp2}"></i>
-                <i class="fas fa-caret-down {countryData.showArrowDown2}"></i>
-                <span class={countryData.comparison}>{Intl.NumberFormat().format(global.casesPerMillion)}</span>
-                <i class="far fa-question-circle" onclick="toggleInfo()"></i>
+                <i className="fas fa-caret-up {countryData.showArrowUp2}"></i>
+                <i className="fas fa-caret-down {countryData.showArrowDown2}"></i>
+                <span className={countryData.comparison}>{Intl.NumberFormat().format(global.casesPerMillion)}</span>
+                <i className="far fa-question-circle" onClick="toggleInfo()"></i>
             </p>
         </div>
     </CountryDataStyled>

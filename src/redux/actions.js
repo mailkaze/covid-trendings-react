@@ -30,3 +30,17 @@ export function toggleSources() {
     type: 'TOGGLE_SOURCES'
   }
 }
+
+export function setSearchTerm(searchTerm) {
+  return {
+    type: 'SET_SEARCH_TERM',
+    payload: searchTerm,
+  }
+}
+
+export function setMatchCountries(match) {
+  return {
+    type: 'SET_MATCH_COUNTRIES',
+    payload: match,
+  }
+}

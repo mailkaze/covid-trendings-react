@@ -65,6 +65,9 @@ const initialState = {
   global: {},
   showInfo: false,
   showSources: false,
+  searchTerm: '',
+  matchCountries: [],
+  country: {},
 }
 
 export default createStore(reducer, initialState)

@@ -10,6 +10,10 @@ export default function reducer(state, action) {
       return {...state, showInfo: !state.showInfo}
     case 'TOGGLE_SOURCES':
       return {...state, showSources: !state.showSources} 
+    case 'SET_SEARCH_TERM':
+      return {...state, searchTerm: action.payload}
+    case 'SET_MATCH_COUNTRIES':
+      return {...state, matchCountries: action.payload}
     default:
       return state
   }
